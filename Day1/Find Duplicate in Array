@@ -1,0 +1,12 @@
+
+
+def findDuplicate(arr:list, n:int):
+    # Write your code here.
+    # Returns an integer.
+    rvis=set()
+
+    for item in arr:
+        if item in rvis:
+            return item
+        else:
+            rvis.add(item)

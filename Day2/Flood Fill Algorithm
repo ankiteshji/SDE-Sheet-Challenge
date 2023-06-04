@@ -1,0 +1,21 @@
+def floodFill(image, x, y, newColor):
+    # Write your Code here.
+    vis=set()
+    n=len(image)
+    m=len(image[0])
+    old=image[x][y]
+
+    
+
+    def dfs(r,c):
+        vis.add((r,c))
+        image[r][c]=newColor
+        dir=[[1,0],[0,1],[-1,0],[0,-1]]
+
+        for dr,dc in dir:
+            dr+=r
+            dc+=c
+            if 0<=dr<n and 0<=dc<m and (dr,dc) not in vis and image[dr][dc]==old:
+                dfs(dr,dc)
+    dfs(x,y)
+    return image

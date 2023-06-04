@@ -1,0 +1,85 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from queue import Queue
+
+from sys import stdin, setrecursionlimit
+setrecursionlimit(10**7)
+
+class Stack:
+    def __init__(self):
+        # Intitialize your data structure here.
+        self.stack=Queue()
+        self.backup=Queue()
+        self.size=0
+    def getSize(self):
+
+        # Implement the getSize() function.
+        return self.size
+
+    def isEmpty(self):
+
+        # Implement the isEmpty() function.
+        if self.stack.empty()==True:
+            return "True"
+        return "False"
+          
+
+    def push(self,ele):
+        # Implement the push() function.
+        self.stack.put(ele)
+        self.size+=1
+    def pop(self):
+
+
+        if self.stack.empty()==False:
+            while self.stack.qsize()!=1:
+                self.backup.put(self.stack.get())
+            ans=self.stack.get()
+            self.size-=1
+            self.stack,self.backup=self.backup,self.stack
+            return ans
+                
+        return -1
+        # Implement the pop() function.
+        
+
+    def top(self):
+
+        # Implement the top() function.
+        if self.stack.empty()==False:
+            while self.stack.qsize()!=1:
+                self.backup.put(self.stack.get())
+            ans=self.stack.get()
+            self.backup.put(ans)
+            self.stack,self.backup=self.backup,self.stack
+            return ans
+        return -1
+
+
+
+
+
+def takeInput():
+    values = list(map(int,stdin.readline().strip().split(" ")))
+    return values
+
+
+
+
+#  main
+st = Stack()
+queries = int(input().strip())
+for _ in range(queries):
+    values = takeInput()
+    if values[0] == 1:
+        st.push(values[1])
+    elif values[0] == 2:
+        print(st.pop())
+    elif values[0] == 3:
+        print(st.top())
+    elif values[0] == 4:
+        print(st.getSize())
+    else:
+        print(st.isEmpty().lower())

@@ -1,0 +1,33 @@
+class Node:
+    def __init__(self, data=0, next=None):
+        self.data = data
+        self.next = next
+
+
+# Don't change the code above.
+
+
+def addTwoNumbers(head1: Node, head2: Node) -> Node:
+    # Write your code here.
+    first=""
+    sec=""
+    while head1 or head2:
+        if head1:
+            first+=str(head1.data)
+            head1=head1.next
+        if head2:
+            sec+=str(head2.data)
+            head2=head2.next
+    final=int(first[::-1])+int(sec[::-1])
+    final=str(final)[::-1]
+    ans=Node()
+    head=ans
+    n=len(final)
+    for i,item in enumerate(final):
+        ans.data=int(item)
+        if i!=n-1:
+            ans.next=Node()
+            ans=ans.next
+    return head
+
+

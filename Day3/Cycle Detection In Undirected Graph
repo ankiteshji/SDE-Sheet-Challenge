@@ -1,0 +1,30 @@
+def cycleDetection(edges, n, m):
+
+    # Write your code here.
+    # Return "Yes" if cycle id present in the graph else return "No".
+
+    adj=[[] for _ in range(n+1)]
+
+    for u,v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+
+    def bfs(src):
+        q=[(src,-1)]
+        vis.add(src)
+        while q:
+            node,parent=q.pop(0)
+
+            for nbr in adj[node]:
+                if nbr not in vis:
+                    vis.add(nbr)
+                    q.append((nbr,node))
+                elif parent !=nbr:
+                    return True
+        return False
+    vis=set()
+    for i in range(1,n+1):
+        if i not in vis:
+            if bfs(i)==True:
+                return "Yes"
+    return "No"

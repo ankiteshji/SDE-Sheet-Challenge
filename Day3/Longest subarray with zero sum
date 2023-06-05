@@ -1,0 +1,23 @@
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+def LongestSubsetWithZeroSum(arr):
+
+    
+    hmap = {}
+ 
+    ans=0
+ 
+    curr=0
+    for i ,item in enumerate(arr):
+        curr += item
+        if curr == 0:
+            ans = i + 1
+        if curr in hmap:
+            ans = max(ans, i - hmap[curr])
+        else:
+            hmap[curr] = i
+ 
+    return ans

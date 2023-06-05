@@ -1,0 +1,53 @@
+uploading cpp code cox error in ide
+#include <vector>
+#include <queue>
+using namespace std;
+
+bool isGraphBirpatite(vector<vector<int>>& edges) {
+    int n = edges.size();
+    int m = edges[0].size();
+
+    vector<vector<int>> adj(n);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (edges[i][j] == 1) {
+                adj[i].push_back(j);
+                adj[j].push_back(i);
+            }
+        }
+    }
+
+    vector<int> color(n, -1);
+
+    auto bfs = [&](int src) {
+        queue<int> q;
+        q.push(src);
+        color[src] = 1;
+
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+
+            for (int item : adj[node]) {
+                if (color[item] == -1) {
+                    color[item] = 1 - color[node];
+                    q.push(item);
+                } else if (color[node] == color[item]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
+    for (int i = 0; i < n; i++) {
+        if (color[i] == -1) {
+            if (!bfs(i)) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}

@@ -1,0 +1,10 @@
+def searchMatrix(mat: [[int]], target: int) -> bool:
+    # Write your code here.
+    hmap={}
+
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            hmap[mat[i][j]]=1+hmap.get(mat[i][j],0)
+    if target in hmap:
+        return True
+    return False

@@ -1,0 +1,38 @@
+Python was giving tle so I converted my python code to cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+std::vector<std::vector<int>> findTriplets(std::vector<int> arr, int n, int K) {
+    std::sort(arr.begin(), arr.end());
+    std::vector<std::vector<int>> finalResult;
+
+    for (int i = 0; i < n; i++) {
+        if (i > 0 && arr[i - 1] == arr[i])
+            continue;
+
+        int left = i + 1;
+        int right = n - 1;
+
+        while (left < right) {
+            int target = arr[i] + arr[left] + arr[right];
+            if (target > K)
+                right--;
+            else if (target < K)
+                left++;
+            else {
+                finalResult.push_back({arr[i], arr[left], arr[right]});
+                left++;
+                // right--;
+
+                while (left < right && arr[left] == arr[left - 1])
+                    left++;
+
+                while (right > left && arr[right] == arr[right - 1])
+                    right--;
+            }
+        }
+    }
+
+    return finalResult;
+}

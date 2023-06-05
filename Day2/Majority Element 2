@@ -1,0 +1,17 @@
+from math import floor
+from collections import *
+from sys import *
+from os import *
+
+def majorityElementII(arr):
+	# Write your code here.
+	hmap={}
+	n=len(arr)
+	ans=[]
+	for item in arr:
+		hmap[item]=1+hmap.get(item,0)
+	
+	for key,val in hmap.items():
+		if val>floor(n/3):
+			ans.append(key)
+	return ans

@@ -1,0 +1,31 @@
+# import sys
+from typing import List
+# sys.setrecursionlimit(10**6)
+
+
+
+def depthFirstSearch(V,E,edges):
+    # write your code here
+
+    adj=[[] for _ in range(V)]
+
+    for u,v in edges:
+        adj[u].append(v)
+        adj[v].append(u)
+    vis=set()
+
+    def dfs(node):
+        vis.add(node)
+        temp.append(node)
+
+        for nbr in adj[node]:
+            if nbr not in vis:
+                dfs(nbr)
+    ans=[]
+    for i in range(V):
+        if i not in vis:
+            temp=[]
+            dfs(i)
+            ans.append(sorted(temp))
+            temp.clear()
+    return ans

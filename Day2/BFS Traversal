@@ -1,0 +1,39 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+
+def BFS(vertex, edges):
+    # Write your solution here
+    # 'vertex' is the number of vertices present in the graph
+    # 'edges' is a matrix of the set of edges between two given vertices in the graph 
+
+    
+    
+    # vis.add(0)?
+    adj=[[0]*vertex for _ in range(vertex)]
+    # if not edges:
+    #     return []
+    for i in range(len(edges[0])):
+        adj[edges[0][i]][edges[1][i]]=1
+        adj[edges[1][i]][edges[0][i]]=1
+    ans=[]
+    vis=[0]*(len(adj))
+    def bfs(node):
+        q=[]
+        q.append(node)
+        vis[node]=1
+        while q:
+            node=q.pop(0)
+            ans.append(node)
+            
+            for i in range(len(adj)):
+                if adj[node][i]==1 and vis[i]==0:
+                    q.append(i)
+                    vis[i]=1
+    
+    for i in range(len(adj)):
+        if vis[i]==0:
+            bfs(i)
+    return ans

@@ -1,0 +1,18 @@
+
+def printPascal(n:int):
+    # Write your code here.
+    # Return a list of lists.
+    ans=[]
+    
+    for i in range(1,n+1):
+        curr=1
+        temp=[]
+        
+        for j in range(1,i+1):
+
+            temp.append(curr)
+            curr=int(curr*(i-j)/j)
+        ans.append(temp)
+            
+    return ans
+

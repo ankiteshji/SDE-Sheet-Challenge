@@ -1,0 +1,25 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def nextPermutation(permutation, n):
+    # Write your code here.
+    br=-1
+    for i in range(n-2, -1, -1):
+        if permutation[i] < permutation[i + 1]:
+            br=i
+            break
+    if br== -1:
+        permutation.reverse()
+        return permutation
+    
+    
+    for i in range(n - 1, br, -1):
+        if permutation[i] > permutation[br]:
+            permutation[i], permutation[br] = permutation[br], permutation[i]
+            break
+
+    permutation[br+1:] = reversed(permutation[br+1:])
+
+    return permutation

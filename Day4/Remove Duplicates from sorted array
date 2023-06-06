@@ -1,0 +1,14 @@
+def removeDuplicates(arr,n):
+    # Write your code here.
+    temp=""
+    ans=0
+    for item in arr:
+        if not temp:
+            temp=item
+            ans=1
+        else:
+            if item!=temp:
+                ans+=1
+                temp=item
+    return ans
+

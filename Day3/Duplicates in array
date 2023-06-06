@@ -1,0 +1,11 @@
+
+def findDuplicate(arr, n):
+    # Write your code here.
+    # Returns an integer.
+    hmap={}
+
+    for item in arr:
+        hmap[item]=1+hmap.get(item,0)
+    for key ,val in hmap.items():
+        if val>=2:
+            return int(key)

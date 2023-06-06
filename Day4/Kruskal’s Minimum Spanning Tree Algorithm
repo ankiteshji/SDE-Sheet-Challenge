@@ -1,0 +1,29 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from heapq import heappop,heappush
+
+def kruskalMST(n, m, graph):
+    # Write your code here.
+    adj=[[] for _ in range(n+1)]
+
+    for u,v,wt in graph:
+        adj[u].append((v,wt))
+        adj[v].append((u,wt))
+    ans=0
+    q=[(0,1)]
+    vis=[0]*(n+1)
+
+    while q:
+        wt,node=heappop(q)
+        if vis[node]==1:
+            continue
+        else:
+            vis[node]=1
+            ans+=wt
+
+            for nbr ,nwt in adj[node]:
+                if vis[nbr]==0:
+                    heappush(q,(nwt,nbr))
+    return ans

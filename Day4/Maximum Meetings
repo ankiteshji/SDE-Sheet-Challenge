@@ -1,0 +1,25 @@
+from os import *
+from sys import *
+from collections import *
+from math import inf
+from heapq import heappop,heappush
+
+
+def maximumMeetings(start, end):
+    # Write your Code here.
+    ans=[]
+    curr=float('-inf')
+    hmap={}
+    final=[]
+    for i in range(len(start)):
+        ans.append((start[i],end[i]))
+        hmap[(start[i],end[i])]=i+1
+    ans.sort(key=lambda x:x[1])
+    
+    for s,e in ans:
+        if s>curr:
+            final.append(hmap[(s,e)])
+            curr=e
+    return final
+
+    

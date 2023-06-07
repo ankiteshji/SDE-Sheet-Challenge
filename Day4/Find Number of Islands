@@ -1,0 +1,33 @@
+def findIslands(mat, n, m):
+	# Your code goe here.
+	vis=set()
+	ans=0
+	
+	
+	
+	def bfs(i,j):
+
+		q=[(i,j)]
+		
+
+		while q:
+			r,c=q.pop(0)
+			
+
+			vis.add((r,c))
+
+			dir=[[1,0],[0,1],[-1,0],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]
+
+			for dr,dc in dir:
+				dr+=r
+				dc+=c
+
+				if 0<=dr<n and 0<=dc<m and (dr,dc) not in vis and mat[dr][dc]==1:
+					vis.add((dr,dc))
+					q.append((dr,dc))
+		return 1
+	for i in range(n):
+		for j in range(m):
+			if mat[i][j]==1 and (i,j) not in vis:
+				ans+=(bfs(i,j))
+	return ans

@@ -1,0 +1,18 @@
+from math import inf
+def maximumActivities(start, finish):
+    # Write your Code here.
+    ans=[]
+
+    for i in range(len(start)):
+        ans.append((start[i],finish[i]))
+
+    ans.sort(key= lambda x:x[1])
+
+    final=0
+    curr=float("-inf")
+
+    for s,e in ans:
+        if s>=curr:
+            final+=1
+            curr=e
+    return final

@@ -1,0 +1,19 @@
+def combinationSum2(arr, n, target):
+    # write your code here
+    arr.sort()
+    ans=[]
+    def find(arr, target, start, comb, result):
+        if target == 0:
+            result.append(comb)
+            return
+
+        for i in range(start, len(arr)):
+            if i > start and arr[i] == arr[i-1]:
+                continue
+            if arr[i] > target:
+                break
+
+            find(arr, target - arr[i], i + 1, comb + [arr[i]], result)
+    find(arr, target, 0, [], ans)
+    return ans
+

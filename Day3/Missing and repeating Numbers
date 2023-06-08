@@ -5,19 +5,18 @@ from os import *
 
 def missingAndRepeating(arr, n):
     # Write your code here
-    hmap={}
-    missing=-1
-    repeating=-1
     
+    repeat=-1
+    hmap={}
+    arr.sort()
+    count=1
     for i,item in enumerate(arr):
         if item in hmap:
-            repeating=item
+            repeat=item
         else:
             hmap[item]=1
-    count=1        
-    # for key in hmap.keys():
-    while count in hmap:
-        count+=1
-    missing=count
+        if count in hmap:
+            count+=1
 
-    return [missing,repeating]
+        
+    return [count,repeat]

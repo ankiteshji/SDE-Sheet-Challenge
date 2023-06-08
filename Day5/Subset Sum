@@ -1,0 +1,23 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from typing import List
+
+def subsetSum(num: List[int]) -> List[int]:
+    # Write your code here.
+    ans=[]
+    n=len(num)
+
+    def sub(i,subset):
+        if i>=n:
+            ans.append(sum(subset))
+            return
+        subset.append(num[i])
+        sub(i+1,subset)
+        subset.pop()
+        sub(i+1,subset)
+    sub(0,[])
+    ans.sort()
+    return ans

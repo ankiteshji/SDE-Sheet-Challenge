@@ -1,0 +1,18 @@
+def findSubsetsThatSumToK(arr, n, k) :
+    # Write your code here.
+    ans=[]
+
+    def subets(i,temp,S):
+        if i>=n:
+            if S==k:
+                ans.append(list(temp))
+            return
+        
+        temp.append(arr[i])
+        S+=arr[i]
+        subets(i+1,temp,S)
+        temp.pop()
+        S-=arr[i]
+        subets(i+1,temp,S)
+    subets(0,[],0)
+    return ans

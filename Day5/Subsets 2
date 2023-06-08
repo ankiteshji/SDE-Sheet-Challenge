@@ -1,0 +1,24 @@
+import sys
+sys.setrecursionlimit(10**6)
+def uniqueSubsets(n ,arr ) :
+
+    # Write your code here.
+    hmap={}
+    final=[]
+    def subsets(i,temp):
+        if i>=n:
+            ok=list(temp)
+            ok.sort()
+            ok=tuple(ok)
+            if ok not in hmap:
+                final.append(sorted(list(temp)))
+                hmap[ok]=1
+            return
+
+        temp.append(arr[i])
+        subsets(i+1,temp)
+        temp.pop()
+        subsets(i+1,temp)
+    subsets(0,[])
+    final.sort()
+    return final

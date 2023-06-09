@@ -1,0 +1,20 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def pwset(v):
+    # Write your code here
+    # Return a 2-D list containing all subsets
+    ans=[]
+    n=len(v)
+    def ALL(i,subset):
+        if i>=n:
+            ans.append(subset[:])
+            return
+        subset.append(v[i])
+        ALL(i+1,subset)
+        subset.pop()
+        ALL(i+1,subset)
+    ALL(0,[])
+    return ans

@@ -1,0 +1,21 @@
+
+
+def findPermutations(s):
+	# Write your code here.
+	n=len(s)
+	ans=[]
+
+	def ALL(hmap,ds):
+		if len(ds)==n:
+			ans.append("".join(ds[:]))
+			return
+
+		for i in range(n):
+			if i not in hmap:
+				hmap[i]=1
+				ds.append(s[i])
+				ALL(hmap,ds)
+				ds.pop()
+				del hmap[i]
+	ALL({},[])
+	return ans

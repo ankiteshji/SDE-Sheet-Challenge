@@ -1,0 +1,8 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def areAnagram(str1, str2):
+    # Write your code here.
+    return sorted(list(str1))==sorted(list(str2))

@@ -1,0 +1,14 @@
+def singleNonDuplicate(arr):
+    # Write your code here
+    
+    hmap={}
+    ans=-1
+    for item in arr:
+        if item in hmap:
+            hmap[item]+=1
+        else:
+            hmap[item]=1
+
+    for key,val in hmap.items():
+        if val==1:
+            return key

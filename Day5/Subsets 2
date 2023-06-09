@@ -5,20 +5,15 @@ def uniqueSubsets(n ,arr ) :
     # Write your code here.
     hmap={}
     final=[]
-    def subsets(i,temp):
-        if i>=n:
-            ok=list(temp)
-            ok.sort()
-            ok=tuple(ok)
-            if ok not in hmap:
-                final.append(sorted(list(temp)))
-                hmap[ok]=1
-            return
-
-        temp.append(arr[i])
-        subsets(i+1,temp)
-        temp.pop()
-        subsets(i+1,temp)
-    subsets(0,[])
-    final.sort()
+    arr.sort()
+    def ALL(ind,susbet):
+        final.append(susbet[:])
+        for i in range(ind,n):
+            if i>ind and arr[i]==arr[i-1]:
+                continue
+            susbet.append(arr[i])
+            ALL(i+1,susbet)
+            susbet.pop()
+    ALL(0,[])
+            
     return final

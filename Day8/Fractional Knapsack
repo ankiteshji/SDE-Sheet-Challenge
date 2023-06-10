@@ -1,0 +1,24 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def maximumValue(items, n, w):
+
+	# Write your code here.
+	# ITEMS contains [weight, value] pairs.
+	
+	items.sort(key=lambda x:x[1]/x[0],reverse=True)
+	total_value = 0.0
+	current_weight = 0.0
+	for i in range(n):
+		if current_weight + items[i][0 ]<= w:
+
+			current_weight =current_weight +items[i][0]
+			total_value += items[i][1]
+		else:
+			remaining_capacity = w - current_weight
+			fraction = remaining_capacity / items[i][0]
+			total_value += fraction * items[i][1]
+			break
+	return total_value

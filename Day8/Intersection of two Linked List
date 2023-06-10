@@ -1,0 +1,27 @@
+'''
+Following is the structure of the Node class already defined.
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        
+'''
+
+def findIntersection(firstHead, secondHead):
+    hmap={}
+    while firstHead:
+        hmap[firstHead]=1
+        if firstHead.next:
+            firstHead=firstHead.next
+        else:
+            break
+    while secondHead:
+        if secondHead in hmap:
+            return secondHead
+        else:
+            if secondHead.next:
+                secondHead=secondHead.next
+            else:
+                break
+    return None

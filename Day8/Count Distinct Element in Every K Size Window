@@ -1,0 +1,29 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def countDistinctElements(arr, k):
+    # Write your code here
+
+    hmap={}
+
+    for i in range(k):
+        hmap[arr[i]]=1+hmap.get(arr[i],0)
+    ans=[len(hmap)]
+
+    
+    l=0
+
+    for r in range(k,len(arr)):
+        if hmap.get(arr[l],0)>0:
+            hmap[arr[l]]-=1
+        if hmap.get(arr[l],0)==0:
+            if arr[l] in hmap:
+                del hmap[arr[l]]
+        l+=1
+        hmap[arr[r]]=1+hmap.get(arr[r],0)
+        ans.append(len(hmap))
+    return ans
+
+    

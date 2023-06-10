@@ -1,0 +1,12 @@
+def reverseString(str):
+    # Write your code from here.
+    s=list(str.split())
+    # s=list(str.split(" "))
+    s=s[::-1]
+    ans=""
+    for item in s:
+        item=item.strip()
+        if item!="":
+            ans+=item+" "
+    return ans
+        

@@ -1,0 +1,19 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def compareVersions(a, b):
+    #Write your code here
+    a = a.split(".")
+    b = b.split(".")
+    n = max(len(a), len(b))
+    for i in range(n):
+        v1_comp = int(a[i]) if i < len(a) else 0
+        v2_comp = int(b[i]) if i < len(b) else 0
+        if v1_comp > v2_comp:
+            return 1
+        elif v1_comp < v2_comp:
+            return -1
+    return 0
+                

@@ -1,0 +1,9 @@
+def kthSmallLarge(arr, n, k):
+    # Write your code here
+    # arr=list(set(arr))
+    arr.sort()
+    ans=[arr[k-1],arr[n-k]]
+    return ans
+
+
+

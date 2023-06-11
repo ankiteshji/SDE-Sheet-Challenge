@@ -1,0 +1,34 @@
+def solveNQueens(n):
+    # Write your code here.
+    
+
+    def safe(row,col):
+        
+        for r,c in board:
+            if r==row or c==col:
+                return False
+            elif abs(row-r)==abs(col-c):
+                return False
+        return True
+
+        
+
+    def Solve(col):
+        if col>=n:
+            temp=[[0]*n for _ in range(n)]
+            for r,c in board:
+                temp[r][c]=1
+            
+            ans.append([val for row in temp for val in row])
+            return 
+        
+        for row in range(n):
+            if safe(row,col)==True:
+                board.append((row,col))
+                Solve(col+1)
+                board.pop()
+    ans=[]
+    board=[]
+    Solve(0)
+    return ans
+

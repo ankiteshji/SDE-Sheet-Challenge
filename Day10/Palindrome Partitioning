@@ -1,0 +1,35 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from sys import stdin
+import json
+
+def partition(s):
+
+    ans=[]
+    n=len(s)
+    path=[]
+    def check(ind):
+        if ind>=n:
+            ans.append(path[:])
+            return
+        for i in range(ind,n):
+            if s[ind:i+1]==s[ind:i+1][::-1]:
+                path.append(s[ind:i+1])
+                check(i+1)
+                path.pop()
+        
+
+    check(0)
+    return ans
+    
+
+s=stdin.readline().rstrip()
+
+final=partition(s)
+
+for ele in final:
+    ele = sorted(ele)
+    print(json.dumps(ele))

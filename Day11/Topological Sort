@@ -1,0 +1,40 @@
+Uploading cpp code because error in ide for python
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void dfs(vector<vector<int>>& adj, vector<int>& vis, vector<int>& stack, int node) {
+    vis[node] = 1;
+    
+    for (int nbr : adj[node]) {
+        if (vis[nbr] == 0) {
+            dfs(adj, vis, stack, nbr);
+        }
+    }
+    
+    stack.push_back(node);
+}
+
+vector<int> topologicalSort(vector<vector<int>>& edges, int v, int e) {
+    vector<vector<int>> adj(v);
+    vector<int> ans;
+    
+    for (int i = 0; i < e; i++) {
+        int u = edges[i][0];
+        int v = edges[i][1];
+        adj[u].push_back(v);
+    }
+    
+    vector<int> vis(v, 0);
+    vector<int> stack;
+    
+    for (int i = 0; i < v; i++) {
+        if (vis[i] == 0) {
+            dfs(adj, vis, stack, i);
+        }
+    }
+    
+    reverse(stack.begin(), stack.end());
+    return stack;
+}

@@ -1,0 +1,28 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+    Following is the Binary Tree node structure:
+    class TreeNode:
+        def __init__(self, data=0, left=None, right=None):
+            self.data = data
+            self.left = left
+            self.right = right
+'''
+def dfs(root,ans):
+    if not root :
+        return
+    if root.left:
+        dfs(root.left,ans)
+    ans.append(root.data)
+    if root.right:
+        dfs(root.right,ans)
+    return ans
+
+def getInOrderTraversal(root):
+    # Write your code here.
+    ans=[]
+    dfs(root,ans)
+    return ans

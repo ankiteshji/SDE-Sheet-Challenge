@@ -1,0 +1,20 @@
+def longestCommonPrefix(arr, n):
+    # Write your code here
+    # Return a string
+    arr.sort()
+
+    first=arr[0]
+    last=arr[-1]
+
+    if first==last:
+        return first
+    ans=""
+
+    for i in range(min(len(first),len(last))):
+        if first[i]==last[i]:
+            ans+=first[i]
+        else:
+            break
+    return ans
+
+

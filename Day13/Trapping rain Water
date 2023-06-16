@@ -1,0 +1,24 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def getTrappedWater(arr, n) :
+	# Write your code here.
+	left=0
+	right=n-1
+	water=0
+	max_left=arr[left]
+	max_right=arr[right]
+
+	while left<right:
+		if arr[left]<=arr[right]:
+			left+=1
+			max_left=max(max_left,arr[left])
+			water+=max_left-arr[left]
+		else:
+			right-=1
+			max_right=max(max_right,arr[right])
+			water+=max_right-arr[right]
+	return water
+	

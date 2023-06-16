@@ -1,0 +1,20 @@
+
+
+def findMiddle(head):
+    # Write your code here
+    # head denoted head of linked list
+    if (head is None):
+        return head
+
+    # If the Linked List has just 1 element that element is the middle
+    if (head.next is None):
+        return head
+
+    fast = head
+    slow = head
+    while (fast and fast.next):
+        fast = fast.next.next
+        slow = slow.next
+
+    return slow
+        

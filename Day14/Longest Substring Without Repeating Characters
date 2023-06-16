@@ -1,0 +1,23 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def uniqueSubstrings(input ) :
+    # Write your code here.
+    s=input
+    n=len(s)
+    l=0
+    hmap=set()
+    ans=0
+    for i,item in enumerate(s):
+        while item in hmap:
+            hmap.remove(s[l])
+            l+=1
+        hmap.add(item)
+        ans=max(ans,len(hmap))
+    
+    return ans      
+            
+        
+    

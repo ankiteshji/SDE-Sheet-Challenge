@@ -1,0 +1,65 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+# Following is the Binary Tree node structure:
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+def checkLeaf(node):
+    if node.left or node.right:
+        return False
+    return True
+def LeftBoundary(root,ans):
+
+    while root:
+        if checkLeaf(root)==False:
+            ans.append(root.data)
+        if root.left:
+            root=root.left
+        else:
+            root=root.right
+def LeafNodes(root,ans):
+    if checkLeaf(root)==True:
+        ans.append(root.data)
+        return
+    if root.left:
+        LeafNodes(root.left,ans)
+    if root.right:
+        LeafNodes(root.right,ans)
+def RightBoundary(root,ans):
+
+    temp=[]
+
+    while root:
+        if checkLeaf(root)==False:
+            temp.append(root.data)
+        if root.right:
+            root=root.right
+        else:
+            root=root.left
+    ans.extend(temp[::-1])
+    return 
+
+
+
+
+
+def traverseBoundary(root):
+    # Write your code here.
+    if not root:
+        return []
+    ans=[]
+
+    if checkLeaf(root)==False:
+        ans.append(root.data)
+    LeftBoundary(root.left,ans)
+    LeafNodes(root,ans)
+    
+    RightBoundary(root.right,ans)
+
+    return ans
+

@@ -1,0 +1,37 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+  ----Binary tree node class for reference-----
+    class TreeNode:
+        def __init__(self, data):
+            self.data = data
+            self.left = None
+            self.right = None
+
+'''
+
+def getMaxWidth(root):
+
+    ans=0
+    if not root:
+      return 0
+    
+    q=[root]
+
+    while q:
+      level=[]
+
+      for _ in range(len(q)):
+        node=q.pop(0)
+        if node:
+          level.append(node)
+        if node.left:
+          q.append(node.left)
+        if node.right:
+          q.append(node.right)
+      if level:
+        ans=max(ans,len(level))
+    return ans

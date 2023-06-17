@@ -1,0 +1,44 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+# BinaryTreeNode class definition
+# class BinaryTreeNode:
+#     def __init__(self, data):
+#         self.data = data
+#         self.left = None
+#         self.right = None
+#
+
+def zigZagTraversal(root):
+    # Write your code here
+    ans=[]
+
+    if not root:
+        return []
+    
+    q=[root]
+    neg=1
+    while q:
+        level=[]
+
+        for _ in range(len(q)):
+            node=q.pop(0)
+            if node:
+                level.append(node.data)
+            # if node.left:
+                q.append(node.left)
+            # if node.right:
+                q.append(node.right)
+        
+        if not ans:
+            ans.extend(level)
+        elif level:
+            if neg==0:
+                ans.extend(level)
+                neg+=1
+            else:
+                ans.extend(level[::-1])
+                neg=0
+    return ans 

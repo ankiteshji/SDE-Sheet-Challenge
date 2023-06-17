@@ -1,0 +1,41 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from typing import List
+
+
+class TreeNode:   
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def solve(root,path,x):
+    if not root :
+        return False
+    if root and root.data==x:
+        path.append(root.data)
+        return True
+    
+    if root.left:
+        path.append(root.data)
+        if solve(root.left,path,x)==True:
+            return True
+        else:
+            path.pop()
+    if root.right:
+        path.append(root.data)
+        if solve(root.right,path,x)==True:
+            return True
+        else:
+            path.pop()
+    return path
+    
+def pathInATree(root: TreeNode, x: int) -> List[int]:
+    # Write your code here.
+    path=[]
+    solve(root,path,x)
+    return path

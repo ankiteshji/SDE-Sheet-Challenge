@@ -1,0 +1,28 @@
+
+from collections import deque,defaultdict
+
+
+def verticalOrderTraversal(root):
+	# Write your code here
+	# Return a list
+    nodes = defaultdict(lambda: defaultdict(list))
+    queue = deque([(root, 0, 0)])
+    while queue:
+        temp, x, y = queue.popleft()
+        nodes[x][y].append(temp.data)
+        
+        if temp.left:
+            queue.append((temp.left, x - 1, y + 1))
+            
+        if temp.right:
+            queue.append((temp.right, x + 1, y + 1))
+    ans = []
+    for _, cols in sorted(nodes.items()):
+        col = []
+        for _, vals in sorted(cols.items()):
+            col.extend(vals)
+        if col:
+            ans.extend((col))
+    for i,item in enumerate(ans):
+        ans[i]=int(item)
+    return ans

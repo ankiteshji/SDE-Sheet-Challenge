@@ -1,0 +1,37 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+  ----Binary tree node class for reference-----
+    class BinaryTreeNode:
+        def __init__(self, data):
+            self.data = data
+            self.left = None
+            self.right = None
+
+'''
+def height(root):
+  
+  if not root:
+    return 0
+  # if root.left:
+  left=height(root.left)
+  if left==-1:
+    return -1
+  right=height(root.right)
+  if right==-1:
+    return -1
+
+  if abs(left-right)>1:
+    return -1
+  return 1+max(left,right)
+
+def isBalancedBT(root):
+  
+  if height(root)==-1:
+    return False
+  
+  return True
+    

@@ -1,0 +1,44 @@
+from os import *
+from sys import *
+from collections import *
+from math import inf
+inf=float('inf')
+
+import sys
+sys.setrecursionlimit(10**7)
+
+def minSumPath(grid):
+    # Write your code here.
+    n=len(grid)
+    m=len(grid[0])
+    prev=[0]*m
+    for i in range(n):
+        curr=[0]*m
+        for j in range(m):
+            if i==0 and j==0:
+                curr[i]=grid[i][j]
+            else:
+                up=inf
+                left=inf
+                
+                if i>0:
+                    up=grid[i][j]+prev[j]
+                
+                if j>0:
+                    left=grid[i][j]+curr[j-1]
+                
+                curr[j]=min(left,up)
+        prev=curr
+    return prev[-1]
+
+# Main.
+t = int(input())
+while (t > 0):
+    l = list(map(int, input().split()))
+    n,m = l[0], l[1]
+    grid = []
+    for i in range(n):
+        ll = list(map(int, input().split()))
+        grid.append(ll)
+    print(minSumPath(grid))
+    t -= 1

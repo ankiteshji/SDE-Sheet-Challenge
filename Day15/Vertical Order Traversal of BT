@@ -5,11 +5,11 @@ from collections import deque,defaultdict
 def verticalOrderTraversal(root):
 	# Write your code here
 	# Return a list
-    nodes = defaultdict(lambda: defaultdict(list))
+    hmap = defaultdict(lambda: defaultdict(list))
     queue = deque([(root, 0, 0)])
     while queue:
         temp, x, y = queue.popleft()
-        nodes[x][y].append(temp.data)
+        hmap[x][y].append(temp.data)
         
         if temp.left:
             queue.append((temp.left, x - 1, y + 1))
@@ -17,12 +17,12 @@ def verticalOrderTraversal(root):
         if temp.right:
             queue.append((temp.right, x + 1, y + 1))
     ans = []
-    for _, cols in sorted(nodes.items()):
-        col = []
-        for _, vals in sorted(cols.items()):
-            col.extend(vals)
-        if col:
-            ans.extend((col))
+    for _, verticals in sorted(hmap.items()):
+        vertical = []
+        for _, levels in sorted(verticals.items()):
+            vertical.extend(levels)
+        if vertical:
+            ans.extend((vertical))
     for i,item in enumerate(ans):
         ans[i]=int(item)
     return ans

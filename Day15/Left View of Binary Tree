@@ -1,0 +1,32 @@
+
+from collections import defaultdict
+
+
+# Binary tree node class for reference
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def getLeftView(root)->list:
+    # Write your code here
+    # Return a list
+    hmap=defaultdict(list)
+    if not root:
+        return []
+    left=[]
+    q=[(root,0)]
+
+    while q:
+        node,level=q.pop(0)
+        hmap[level].append(node.data)
+        if node.left:
+            q.append((node.left,level+1))
+        if node.right:
+            q.append((node.right,level+1))
+    
+    for level,nodes in sorted(hmap.items()):
+        left.append(nodes[0])
+    return left
+

@@ -1,0 +1,72 @@
+from os import *
+from sys import *
+from collections import *
+from math import inf
+
+inf=float('inf')
+
+from sys import stdin, setrecursionlimit
+setrecursionlimit(10**7)
+def getMaxPathSum(matrix):
+    n=len(matrix)
+    m=len(matrix[0])
+    
+    dp=[[-1 for _ in range(m)]for _ in range(n)]
+    
+    for j in range(m):
+        dp[0][j]=matrix[0][j]
+    for i in range(1,n):
+
+        for j in range(m):
+            up=matrix[i][j]+dp[i-1][j]
+            leftdig=-inf
+            rightdig=-inf
+
+            if j>0:
+                leftdig=matrix[i][j]+dp[i-1][j-1]
+            if j+1<m:
+                rightdig=matrix[i][j]+dp[i-1][j+1]
+            dp[i][j]=max(up,leftdig,rightdig)
+    
+    return max(dp[-1][:])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#   taking inpit using fast I/O
+def takeInput() :
+    n_x = stdin.readline().strip().split(" ")
+    n = int(n_x[0].strip())
+    m = int(n_x[1].strip())
+
+    matrix=[list(map(int, stdin.readline().strip().split(" "))) for row in range(n)]
+
+    return matrix, n, m
+
+
+#   main
+T = int(input())
+while (T > 0):
+    T -= 1
+    matrix, n, m = takeInput()
+    print(getMaxPathSum(matrix))

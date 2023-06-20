@@ -1,0 +1,25 @@
+
+# Binary tree node class for reference
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def lowestCommonAncestor(root, x, y):
+    if not root:
+        return -1
+    elif root.data == x or root.data == y:
+        return root.data
+    else:
+        leftLCA = lowestCommonAncestor(root.left, x, y)
+        rightLCA = lowestCommonAncestor(root.right, x, y)
+        if leftLCA != -1 and rightLCA != -1:
+            return root.data
+        elif leftLCA != -1:
+            
+            return leftLCA
+        else:
+            return rightLCA
+    

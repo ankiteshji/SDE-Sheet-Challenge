@@ -1,0 +1,122 @@
+from os import *
+from sys import *
+from collections import *
+from math import inf
+inf=float('inf')
+
+from sys import stdin, setrecursionlimit
+from queue import Queue
+setrecursionlimit(10**7)
+
+
+# Binary tree node class for reference.
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.val = data
+        self.left = None
+        self.right = None
+
+def solve(root,ans):
+    if not root:
+        return 0
+    if not root.left and not root.right:
+        return root.val
+    
+    left=solve(root.left,ans)
+    right=solve(root.right,ans)
+    if root.left and root.right :
+        ans[0]=max(ans[0],left+right+root.val)
+        return max(0,max(left, right) + root.val)
+    if root.left is None:
+        return right + root.val
+    else:
+        return left + root.val
+    
+
+
+def findMaxSumPath(root):
+    
+    # Write your code here.
+    ans=[-inf]
+    ans1=solve(root,ans)
+    if not root:
+        return -1
+
+    if ans[0]!=-inf:
+        return ans[0]
+    return -1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Taking level-order input using fast I/O method.
+def takeInput():
+    levelOrder = list(map(int, stdin.readline().strip().split(" ")))
+    start = 0
+
+    length = len(levelOrder)
+
+    if length == 1:
+        return None
+
+    root = BinaryTreeNode(levelOrder[start])
+    start += 1
+
+    q = Queue()
+    q.put(root)
+
+    while not q.empty():
+        currentNode = q.get()
+
+        leftChild = levelOrder[start]
+        start += 1
+
+        if leftChild != -1:
+            leftNode = BinaryTreeNode(leftChild)
+            currentNode.left = leftNode
+            q.put(leftNode)
+
+        rightChild = levelOrder[start]
+        start += 1
+
+        if rightChild != -1:
+            rightNode = BinaryTreeNode(rightChild)
+            currentNode.right = rightNode
+            q.put(rightNode)
+
+    return root
+
+
+# Main.
+t = int(input())
+for i in range(t):
+    root = takeInput()
+    maxSum = findMaxSumPath(root)
+    print(maxSum)

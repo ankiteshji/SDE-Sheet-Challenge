@@ -19,9 +19,6 @@ class   TreeNode :
 
 def LCAinaBST(root, P, Q):
 
-    # Write your code here
-    # P and Q are the given nodes
-    # Return LCA node
     if not root:
         return None
     elif  root==P or root ==Q:
@@ -30,9 +27,9 @@ def LCAinaBST(root, P, Q):
     left=LCAinaBST(root.left,P,Q)
     right=LCAinaBST(root.right,P,Q)
     
-    if not left:
-        return right
-    if not right:
+    if  left and right:
+        return root
+    elif left :
         return left
     else:
-        return root
+        return right

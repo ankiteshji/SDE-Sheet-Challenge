@@ -1,0 +1,39 @@
+
+
+'''
+Binary tree node class for reference
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+'''
+class BinaryTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def buildBinaryTree(preorder:list, inorder:list):
+    inmap={}
+    
+    for i in range(len(inorder)):
+        inmap[inorder[i]]=i
+    
+    root= construct_tree(preorder,0,len(preorder)-1,inorder,0,len(inorder)-1,inmap)
+    
+    return root 
+def construct_tree(preorder,preStart,preEnd,inorder,inStart,inEnd,inmap):
+    if preStart>preEnd or inStart > inEnd:
+        return None
+        
+    root=BinaryTreeNode(preorder[preStart])
+    inRoot=inmap[root.data]
+    numsLeft=inRoot-inStart
+    root.left=construct_tree(preorder,preStart+1,preStart+numsLeft,inorder,inStart,inRoot-1,inmap)
+    root.right=construct_tree(preorder,preStart+1+numsLeft,preEnd,inorder,inRoot+1,inEnd,inmap)
+    
+    return root
+    
+    

@@ -1,0 +1,52 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+    Following is the TreeNode class structure
+
+	class   TreeNode :
+    	def __init__(self, val) :
+        	self.val = val
+        	self.left = None
+        	self.right = None
+
+'''
+class   TreeNode :
+	def __init__(self, val) :
+		self.val = val
+		self.left = None
+		self.right = None
+def insertionInBST(root,val):
+    # Write your code here.
+
+	node=root
+	
+
+	while True:
+
+		if node:
+			if node.val>val:
+				if node.left:
+					node=node.left
+				else:
+					node.left=TreeNode(val)
+
+					break
+			elif node.val<val:
+				if node.right:
+					node=node.right
+				else:
+					node.right=TreeNode(val)
+					break
+		else:
+			node=TreeNode(val)
+			root=node
+			break
+	return root
+		
+	
+
+    
+    

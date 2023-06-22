@@ -1,0 +1,39 @@
+'''
+
+	Following is the TreeNode class structure
+
+	class   TreeNode :
+    	def __init__(self, val) :
+        	self.data = data
+        	self.left = None
+        	self.right = None
+
+'''
+class TreeNode :
+    def __init__(self, data) :
+        self.data = data
+        self.left = None
+        self.right = None
+
+def getTreeFromPostorderAndInorder(postOrder, inOrder):
+	
+    inmap={}
+    for i in range(len(inOrder)):
+        inmap[inOrder[i]]=i
+    
+    root=Construct(postOrder,len(postOrder)-1,0,inOrder,0,len(inOrder)-1,inmap)
+    
+    return root
+
+def Construct(postOrder,postEnd,postStart,inOrder,inStart,inEnd,inMap):
+    if inStart>inEnd or postStart>postEnd:
+        return None
+    
+    root=TreeNode(postOrder[postEnd])
+    inRoot=inMap[root.data]
+    numsLeft=inRoot-inStart
+    
+    root.left=Construct(postOrder,postStart+numsLeft-1,postStart,inOrder,inStart,inRoot-1,inMap)
+    root.right=Construct(postOrder,postEnd-1,postStart+numsLeft,inOrder,inRoot+1,inEnd,inMap)
+    return root
+    

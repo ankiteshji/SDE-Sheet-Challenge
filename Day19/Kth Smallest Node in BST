@@ -1,0 +1,40 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+    Following is the TreeNode class structure
+   
+    class   TreeNode :
+        def __init__(self, data) :
+            self.data = data
+            self.left = None
+            self.right = None
+
+        def __del__(self):
+            if self.left:
+                del self.left
+            if self.right:
+                del self.right
+
+'''
+def kthSmallest(root, k):
+    #  Write the code here.
+    count=0
+    q=[]
+    node=root
+    while True:
+        
+        if node:
+            q.append(node)
+            node=node.left
+        else:
+            if not q:
+                break
+            node=q.pop()
+            count+=1
+            if count==k:
+                return node.data
+            node=node.right
+        

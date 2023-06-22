@@ -1,0 +1,58 @@
+class TreeNode:
+    def __init__(self, data) :
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def __del__(self):
+        if self.left:
+            del self.left
+        if self.right:
+            del self.right
+
+def serializeTree(root):
+    
+    if not root:
+        return ""
+    serialized=[]
+    q=[root]
+    
+    while q:
+        node=q.pop(0)
+        if node:
+            serialized.append(str(node.data))
+            q.append(node.left)
+            q.append(node.right)
+        else:
+            serialized.append("#")
+    return ",".join(serialized)
+
+def deserializeTree(serialized):
+
+    if not serialized:
+        return None
+    values=serialized.split(',')
+    root=TreeNode(int(values[0]))
+    q=[root]
+    i=1
+    n=len(values)
+    while q:
+        node=q.pop(0)
+        if i<n:
+            if values[i]=="#":
+                node.left=None
+            else:
+                newNode=TreeNode(int(values[i]))
+                node.left=newNode
+                q.append(newNode)
+        i+=1
+
+        if i<n :
+            if  values[i]=="#":
+                node.right=None
+            else:
+                newNode=TreeNode(int(values[i]))
+                node.right=newNode
+                q.append(newNode)
+        i+=1
+    return root

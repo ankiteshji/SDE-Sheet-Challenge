@@ -1,0 +1,71 @@
+from sys import stdin,setrecursionlimit
+setrecursionlimit(10**7)
+from math import inf
+inf=float('inf')
+
+
+def countWaysToMakeChange(denominations, value) :
+    
+	# Your code goes here
+    
+    prev=[0]*(1+value)
+    for target in range(1+value):
+        if target%denominations[0]==0:
+            prev[target]=1
+    n=len(denominations)
+    for ind in range(1,n):
+        curr=[0]*(1+value)
+        for target in range(1+value):
+            notpick=prev[target]
+            pick=0
+            if denominations[ind]<=target:
+                pick=curr[target-denominations[ind]]
+            curr[target]=pick+notpick
+        prev=curr
+    return prev[value]
+
+    # return ways(len(denominations)-1,value,denominations,dp)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#taking inpit using fast I/O
+def pickInput() :
+    numDenominations = int(input())
+
+    denominations = list(map(int, stdin.readline().strip().split(" ")))
+
+    value = int(input())
+    return denominations, numDenominations, value
+
+
+#main
+denominations, numDenomination, value = pickInput()
+print((countWaysToMakeChange(denominations, value)))

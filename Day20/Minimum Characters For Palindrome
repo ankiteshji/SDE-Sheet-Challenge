@@ -1,0 +1,26 @@
+def minCharsforPalindrome(s):
+
+    # Write your code here
+    if s==s[::-1]:
+        return 0
+    else:
+        n=len(s)
+        j=n-1
+        ans=0
+        def check(s):
+            return s==s[::-1]
+        while True:
+            
+            while j>=0 and s[0]!=s[j]:
+                j-=1
+            ans=n-j-1
+            if check(s[:j+1])==True:
+                break
+            else:
+                j-=1
+            
+        return ans
+
+
+
+

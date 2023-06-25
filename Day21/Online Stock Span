@@ -1,0 +1,18 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def findSpans(price):
+    spans = [1]
+    stack = [(price[0], 0)]
+    for i in range(1, len(price)):
+        while stack and price[i] >= stack[-1][0]:
+            stack.pop() 
+        if stack:
+            spans.append(i - stack[-1][1])
+        else:
+            spans.append(i + 1)
+            
+        stack.append((price[i], i))
+    return spans

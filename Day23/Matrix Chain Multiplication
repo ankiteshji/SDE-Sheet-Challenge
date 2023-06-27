@@ -1,0 +1,21 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+
+def matrixMultiplication(arr, n):
+	dp=[[-1 for _ in range(n)]for _ in range(n)]
+
+	for i in range(n):
+		dp[i][i]=0
+	
+	for i in range(n-1,0,-1):
+		for j in range(i+1,n):
+			mi=1e10
+			for k in range(i,j):
+				steps=arr[i-1]*arr[k]*arr[j] +dp[i][k]+dp[k+1][j]
+				mi=min(mi,steps)
+			dp[i][j]=mi
+			
+	return dp[1][n-1]

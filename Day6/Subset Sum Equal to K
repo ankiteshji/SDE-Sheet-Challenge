@@ -1,0 +1,24 @@
+
+import sys
+sys.setrecursionlimit(10**8)
+def check(i,k,arr,dp):
+    if k==0:
+        return True
+    if i==0:
+        return arr[0]==k
+    if dp[i][k]!=-1:
+        return dp[i][k]
+    Not=check(i-1,k,arr,dp)
+    take=False
+    if arr[i]<=k :
+        take=check(i-1,k-arr[i],arr,dp)
+    dp[i][k]= take or Not
+    return dp[i][k]
+def subsetSumToK(n, k, arr):
+    dp=[[-1 for _ in range(1+k)]for _ in range(n)]
+    if check(n-1,k,arr,dp)==True:
+        return True
+    return False
+    
+    
+

@@ -1,0 +1,32 @@
+from math import inf
+inf=float('inf')
+
+from typing import List
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def Build(preOrder,i,uB):
+    if i[0]>=len(preOrder)or preOrder[i[0]]>uB:
+        return None
+    
+    node=TreeNode(preOrder[i[0]])
+    i[0]+=1
+    node.left=Build(preOrder,i,node.val)
+    node.right=Build(preOrder,i,uB)
+    return node
+
+def preOrderTree(preOrder: List[int]) -> TreeNode:
+    # Write your code here
+    if not preOrder :
+        return None
+    i=[0]
+    root= Build(preOrder,i,inf)
+    
+    return root
+
+    
+

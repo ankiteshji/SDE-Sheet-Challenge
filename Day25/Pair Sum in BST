@@ -1,0 +1,65 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+
+    Following is the Binary Tree Node structure:
+
+    class  TreeNode :
+        def __init__(self, data) :
+            self.data = data
+            self.left = None
+            self.right = None
+
+        def __del__(self):
+            if self.left:
+                del self.left
+            if self.right:
+                del self.right
+
+'''
+class BSTIterator:
+    def __init__(self,root,reverse):
+        self.q=[]
+        self.reverse=reverse
+        self.PushAll(root)
+        
+        
+    def PushAll(self, root):
+        while root:
+            self.q.append(root)
+            if not self.reverse:
+                root = root.left
+            else:
+                root = root.right
+
+
+    def next(self):
+        element=self.q.pop()
+        if not self.reverse:
+            self.PushAll(element.right)
+        else:
+            self.PushAll(element.left)
+        return element.data
+
+
+
+def pairSumBST(root, k):
+    if not root:
+        return False
+    l=BSTIterator(root,False)
+    r=BSTIterator(root,True)
+    i=l.next()
+    j=r.next()
+
+    while i<j:
+        if i+j==k:
+            return True
+        elif i+j<k:
+            i=l.next()
+        else:
+            j=r.next()
+    return False
+

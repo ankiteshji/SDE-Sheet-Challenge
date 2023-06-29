@@ -1,0 +1,43 @@
+
+
+'''
+Binary tree node class for reference
+
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        
+'''
+class BSTiterator:
+    def __init__(self, root):
+        # Complete the constructor function
+        self.q=[]
+        self.PushAll(root)
+
+    def next(self):
+        # Complete the functiom
+        element=self.q.pop()
+        self.PushAll(element.right)
+        return element.data
+
+    def hasNext(self):
+        # Complete the function
+        if not self.q:
+            return False
+        return True
+        
+    def PushAll(self,node):
+        
+        while node:
+            self.q.append(node)
+            node=node.left
+        
+        
+'''
+    Your BSTIterator object will be instantiated and called as such:
+    BSTIterator iterator(root)
+    while(iterator.hasNext()):
+       print(iterator.next())
+'''

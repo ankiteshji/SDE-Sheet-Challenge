@@ -1,0 +1,35 @@
+from os import *
+from sys import *
+from collections import *
+from math import inf
+inf=float('inf')
+
+'''
+
+    ------- Binary Tree node structure -------
+            class TreeNode :
+                def __init__(self, data) :
+                    self.data = data
+                    self.left = None
+                    self.right = None
+
+'''
+class NodeValue:
+    def __init__(self,minNode,maxNode,maxSize):
+        self.maxNode=maxNode
+        self.minNode=minNode
+        self.maxSize=maxSize
+
+def Helper(root):
+    if not root:
+        return NodeValue(inf,-inf,0)
+    
+    left=Helper(root.left)
+    right=Helper(root.right)
+
+    if root.data>  left.maxNode and root.data<right.minNode:
+        return NodeValue(min(root.data,left.minNode),max(root.data,right.maxNode),left.maxSize+right.maxSize+1)
+    return NodeValue(-inf,inf,max(left.maxSize,right.maxSize))
+
+def largestBST(root):
+    return Helper(root).maxSize

@@ -1,0 +1,51 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+    ------- Binary Tree node structure -------
+            class   BinaryTreeNode :
+                def __init__(self, data) :
+                    self.data = data
+                    self.left = None
+                    self.right = None
+
+                def __del__(self):
+                    if self.left:
+                        del self.left
+                    if self.right:
+                        del self.right
+      
+'''
+def Inorder(root,ans):
+    if not root:
+        return
+    if root.left:
+        Inorder(root.left,ans)
+    ans.append(root.data)
+    if root.right:
+        Inorder(root.right,ans)
+    return ans
+def predecessorSuccessor(root, key):
+    curr=root
+    predecessor=-1
+    Successor=-1
+    ans=[]
+    Inorder(root,ans)
+    
+    for i in range(len(ans)):
+        if ans[i]==key:
+            if i+1<len(ans):
+                Successor=ans[i+1]
+                if i-1>=0 :
+                    predecessor=ans[i-1]
+                break
+            else:
+                if i-1>=0 :
+                    predecessor=ans[i-1]
+                break
+    ans=[predecessor,Successor]
+    return ans
+
+    

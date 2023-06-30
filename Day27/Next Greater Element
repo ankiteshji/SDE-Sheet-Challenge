@@ -1,0 +1,44 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from sys import stdin
+
+def nextGreater(arr,n):
+    ans=[0]*n
+    stack=[]
+    
+    for i in range(n-1,-1,-1):
+        
+        while stack and arr[i]>=stack[-1]:
+            stack.pop()
+        if not stack:
+            ans[i]-=1
+        else:
+            ans[i]=stack[-1]
+        stack.append(arr[i])
+    
+    return ans
+    
+    
+    
+    
+    
+
+
+
+#Main
+
+t = int(stdin.readline().rstrip())
+
+while t>0:
+    
+    n=int(stdin.readline().rstrip())
+    arr = list(map(int, stdin.readline().rstrip().split(" ")))
+    z=(nextGreater(arr,n))
+    for i in z:
+        print(i,end=" ")
+    print()
+    
+    t -= 1

@@ -1,0 +1,48 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+from sys import stdin, setrecursionlimit
+import sys
+setrecursionlimit(10**7)
+
+def solve(i,s,dp):
+    if i==len(s):
+        return 0
+    if dp[i]!=-1:
+        return dp[i]
+    temp=""
+    mi=1e10
+    for j in range(i,len(s)):
+        temp+=s[j]
+        if temp==temp[::-1]:
+            cost=1+solve(j+1,s,dp)
+            mi=min(mi,cost)
+    dp[i]=mi
+    return mi
+
+
+def palindromePartitioning(s):
+    dp=[-1]*(len(s))
+    return solve(0,s,dp)-1
+
+
+
+
+
+
+
+
+
+
+
+
+# Main
+t = int(input())
+while t:
+    string = list(map(str, input()))
+    while(" " in string):
+        string.remove(" ")
+    print(palindromePartitioning(string))
+    t = t-1

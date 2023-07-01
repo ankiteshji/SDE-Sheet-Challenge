@@ -1,0 +1,19 @@
+from os import *
+from sys import *
+from collections import *
+from math import inf
+
+def bellmonFord(n, m, src, dest, edges):
+    dis=[1000000000]*(n+1)
+    dis[src]=0
+
+    for i in range(n):
+        for u,v,w in edges:
+            if dis[u]!=1000000000:
+                if dis[u]+w<dis[v]:
+                    dis[v]=dis[u]+w
+
+    
+    return dis[dest]
+
+    

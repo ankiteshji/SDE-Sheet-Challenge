@@ -1,0 +1,41 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def solve(ind,s,dic,n,dp):
+    if ind==n:
+        return [""]
+    if ind in dp:
+        return dp[ind][:]
+    word=""
+    sub=[]
+    ans=[]
+    for j in range(ind,n):
+        word+=s[j]
+
+        if word not in dic:
+            continue
+        sub=solve(j+1,s,dic,n,dp)
+
+        for i in range(len(sub)):
+
+            if len(sub[i])!=0:
+                sub[i] = word + " " + sub[i]
+            else:
+                sub[i]=word
+        
+
+        for item in sub:
+            ans.append(item)
+    dp[ind]=ans
+    return ans[:]
+
+        
+def wordBreak(s, dictionary):
+    dic=set()
+    dp=defaultdict()
+    for item in dictionary:
+        dic.add(item)
+    return solve(0,s,dic,len(s),dp)
+    

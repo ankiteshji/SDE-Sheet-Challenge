@@ -1,0 +1,25 @@
+from math import inf
+inf=float('inf')
+from heapq import heappop,heappush
+def floydWarshall(n, m, src, dest, edges):
+    # Write your code here.
+    
+    dis=[[1000000000 for _ in range(n+1)]for _ in range(n+1)]
+    
+    for i in range(1,n+1):
+        dis[i][i]=0
+        
+    for u,v,wt in edges:
+        dis[u][v]=wt
+        
+    
+    
+    
+    for via in range(1,n+1):
+        for i in range(1,n+1):
+            for j in range(1,n+1):
+                if dis[i][via]!=1000000000 and dis[via][j]!=1000000000:
+                    dis[i][j]=min(dis[i][j],dis[i][via]+dis[via][j])
+    return dis[src][dest] 
+    
+

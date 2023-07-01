@@ -1,0 +1,28 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from heapq import heappush,heappop
+
+def dijkstra(vec, vertices, edges, source):
+    # Write your code here.
+    adj=[[] for _ in range(vertices)]
+
+    for u,v,wt in vec:
+        adj[u].append((v,wt))
+        adj[v].append((u,wt))
+    dis=[2147483647]*(vertices)
+
+    q=[(0,source)]
+    dis[source]=0
+    while q:
+        d,node=heappop(q)
+        
+
+        for nbr,nwt in adj[node]:
+            
+            if dis[nbr]>d+nwt:
+                dis[nbr]=d+nwt
+                heappush(q,(d+nwt,nbr))
+    return dis
+

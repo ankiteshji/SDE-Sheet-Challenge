@@ -1,0 +1,33 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from heapq import heappop,heappush
+def calculatePrimsMST(n, m, g):
+    # Write your code here.
+    # Return a 2-D list.
+    mst=[]
+    q=[(0,1,-1)]
+    adj=[[] for _ in range(n+1)]
+    for u,v,wt in g:
+        adj[u].append((v,wt))
+        adj[v].append((u,wt))
+    vis=set()
+
+    while q:
+        wt,node,parent=heappop(q)
+        if node in vis:
+            continue
+        if parent!=-1:
+            mst.append([node,parent,wt])
+        vis.add(node)
+
+        for nbr,nwt in adj[node]:
+            if nbr not in vis:
+                heappush(q,(nwt,nbr,node))
+    return mst
+        
+
+
+
+

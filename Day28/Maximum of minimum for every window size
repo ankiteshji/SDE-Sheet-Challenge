@@ -1,0 +1,51 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+def nextsmaller(arr):
+    n=len(arr)
+    stack=[]
+    ans=[0]*(n)
+
+    for i in range(n-1,-1,-1):
+        while stack and arr[i]<=arr[stack[-1]]:
+            stack.pop()
+        if stack:
+            ans[i]=stack[-1]
+        else:
+            ans[i]=n
+        stack.append(i)
+    return ans
+def prevSmaller(arr):
+    n=len(arr)
+    stack=[]
+    ans=[]
+    
+    for i in range(n):
+        while stack and arr[i]<=arr[stack[-1]]:
+            stack.pop()
+        if stack:
+            ans.append(stack[-1])
+        else:
+            ans.append(-1)
+        stack.append(i)
+    return ans
+        
+    
+def maxMinWindow(arr,n):
+    
+    ans=[-inf]*n
+    next=nextsmaller(arr)
+    prev=prevSmaller(arr)
+    for i in range(n):
+        window=next[i]-prev[i]-1
+        ans[window-1]=max(ans[window-1],arr[i])
+    for i in range(n - 2, -1, -1):
+
+        ans[i] = max(ans[i], ans[i + 1])
+
+
+
+    return ans
+        
+    

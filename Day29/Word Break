@@ -1,0 +1,22 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+
+
+    
+
+def wordBreak(arr, n, target):
+    # Write your code here.
+    check=set(arr)
+
+    temp=""
+    last=-1
+    for i in range(len(target)):
+        temp+=target[i]
+        if temp in check:
+            temp=""
+    if not temp:
+        return 1
+    return 0

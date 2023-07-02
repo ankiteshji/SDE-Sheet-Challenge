@@ -1,0 +1,22 @@
+from heapq import heappop,heappush
+
+def mergeKSortedArrays(kArrays, k:int):
+	# Write your code here.
+	# kArrays is a list of 'k' lists.
+	# Return a list.
+	ans=[]
+	pq=[]
+	
+	for i,item in enumerate(kArrays):
+		heappush(pq, (item[0], i, 0))
+	
+	while pq:
+		curr=heappop(pq)
+
+		ans.append(curr[0])
+
+		j=curr[-1]
+		i=curr[1]
+		if j+1<len(kArrays[i]):
+			heappush(pq,(kArrays[i][j+1],i,j+1))
+	return ans

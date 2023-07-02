@@ -1,0 +1,19 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from heapq import heappush,heappop
+def minHeap(N: int, Q: [[]]) -> []:
+
+    # Write your code frome here.
+    stack=[]
+    ans=[]
+    for i in range(N):
+        if Q[i][0]==0:
+            heappush(stack,Q[i][1])
+        else:
+            ans.append(heappop(stack))
+    return ans
+            
+
+

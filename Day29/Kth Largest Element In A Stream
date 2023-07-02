@@ -1,0 +1,52 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+from heapq import heappop,heappush
+from sys import stdin 
+class Kthlargest:
+    def __init__(self,k,arr):
+        self.pq=[]
+        self.k=k
+        self.arr=arr
+
+        for item in arr:
+            heappush(self.pq,item)
+            if len(self.pq)>k:
+                heappop(self.pq)
+    
+    def add(self,num):
+        self.num=num
+        heappush(self.pq,self.num)
+
+        if len(self.pq)>self.k:
+            heappop(self.pq)
+
+    
+    def getKthLargest(self):
+
+        return self.pq[0]
+        
+        
+    
+        
+q,k = map(int,input().split(" "))
+
+arr = list(map(int, stdin.readline().rstrip().split(" ")))
+
+object=Kthlargest(k,arr)
+
+for i in range(q):
+    ip = list(map(int, stdin.readline().rstrip().split(" ")))
+
+    # Ip[0] is 1 definitely.
+    if len(ip) == 2: 
+
+        # Add the value at ip[1] in the pool and sort it.
+        object.add(ip[1]) 
+
+    # Means ip[0] is 2 definitely.    
+    else:
+
+        # Returns/prints the kth largest no.
+        print(object.getKthLargest()) 

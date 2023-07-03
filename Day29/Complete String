@@ -1,0 +1,59 @@
+
+
+from typing import *
+class TrieNode:
+    def __init__(self):
+        self.links=[None]*26
+        self.flag=False
+    def isContainKey(self,char):
+        return self.links[ord(char)-ord('a')]!=None
+    def get(self,char):
+        return self.links[ord(char)-ord('a')]
+    def put(self,char,node):
+        self.links[ord(char)-ord('a')]=node
+
+    def getEnd(self):
+        return self.flag
+    def setEnd(self):
+        self.flag=True
+class Trie:
+    def __init__(self):
+        self.root=TrieNode()
+    def insert(self,word):
+        node=self.root
+
+        for char in word:
+            if not node.isContainKey(char):
+                node.put(char, TrieNode())
+            node=node.get(char)
+        node.setEnd()
+    def checkIfPrefixExists(self,word):
+        node=self.root
+
+        for char in word:
+            if node.isContainKey(char):
+                node=node.get(char)
+                if node.getEnd()==False:
+                    return False
+
+            else:
+                return False
+
+        return True
+
+def completeString(n: int, a: List[str])-> str:
+    trie=Trie()
+    for word in a:
+        trie.insert(word)
+    largest=""
+
+    for word in a:
+        if trie.checkIfPrefixExists(word):
+            if len(word)>len(largest):
+                largest=word
+            elif len(word)==len(largest) and word<largest:
+                largest=word
+
+    if len(largest)==0:
+        return "None"
+    return largest

@@ -1,0 +1,31 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def slidingWindowMaximum(nums:list, k:int):
+	# Write your code here
+	# Return a list
+	hmap={}
+	ma=0
+	n=len(nums)
+	
+	for i in range(k):
+		hmap[nums[i]]=1+hmap.get(nums[i],0)
+		ma=max(ma,nums[i])
+	l=0
+	ans=[ma]
+	for r in range(k,n):
+		
+		if nums[l] in hmap:
+			hmap[nums[l]]-=1
+			if hmap[nums[l]]==0:
+				del hmap[nums[l]]
+		l+=1
+		hmap[nums[r]]=1+hmap.get(nums[r],0)
+		ma=max(hmap.keys())
+		ans.append(ma)
+	return ans
+
+	
+	

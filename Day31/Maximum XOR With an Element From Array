@@ -1,0 +1,54 @@
+class TrieNode:
+	def __init__(self):
+		self.links=[None]*2
+	
+	def isContainKey(self,bit):
+		return self.links[bit]!=None
+	def get(self,bit):
+		return self.links[bit]
+	def put(self,bit,node):
+		self.links[bit]=node
+class Trie:
+	def __init__(self):
+		self.root=TrieNode()
+
+	def insert(self,num):
+
+		node=self.root
+
+		for i in range(31,-1,-1):
+			bit =(num>>i) & 1
+
+			if not node.isContainKey(bit):
+				node.put(bit,TrieNode())
+			node=node.get(bit)
+	def getMax(self,num):
+		node=self.root
+		ma_num=0
+		for i in range(31,-1,-1):
+			bit=(num>>i)  & 1
+
+			if node.isContainKey(1-bit):
+				ma_num=ma_num|1<<i
+				node=node.get(1-bit)
+			else:
+				node=node.get(bit)
+			
+		return ma_num
+def maxXorQueries(arr, queries):
+	trie=Trie()
+	arr.sort()
+	ans=[-1]*(len(queries))
+	for i in range(len(queries)):
+		queries[i].append(i)
+	queries.sort(key=lambda x:x[1])
+	j=0
+	n=len(arr)
+	for xor,x,i in queries:
+		
+		while j<n and arr[j]<=x:
+			trie.insert(arr[j])
+			j+=1
+		if j!=0:
+			ans[i]=trie.getMax(xor)
+	return ans

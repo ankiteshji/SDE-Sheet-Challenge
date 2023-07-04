@@ -1,0 +1,50 @@
+class TrieNode:
+    def __init__(self):
+        self.links=[None]*2
+
+    def isContainKey(self,bit):
+        return self.links[bit]!=None
+
+    def get(self,bit):
+        return self.links[bit]
+    def put(self,bit,node):
+        self.links[bit]=node
+class Trie:
+    def __init__(self):
+        self.root=TrieNode()
+    
+    def insert(self,num):
+        node=self.root
+
+        for i in range(31,-1,-1):
+            bit=(num>>i ) & 1
+
+            if not node.isContainKey(bit):
+                node.put(bit,TrieNode())
+            node=node.get(bit)
+    def getMax(self,num):
+        node=self.root
+        ma_num=0
+        for i in range(31,-1,-1):
+            bit=(num>>i)  & 1
+
+            if node.isContainKey(1-bit):
+                ma_num=ma_num|1<<i
+                node=node.get(1-bit)
+            else:
+                node=node.get(bit)
+            
+        return ma_num
+
+
+def maximumXor(A):
+    # Write your code here.
+    ans=0
+    trie=Trie()
+
+    for num in A:
+        trie.insert(num)
+
+    for num in A:
+        ans=max(ans,trie.getMax(num))
+    return ans

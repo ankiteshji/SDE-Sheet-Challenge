@@ -1,0 +1,47 @@
+
+from sys import stdin
+class LRUCache:
+	# Initialize the LRU Cache
+	def __init__(self, capacity):
+		# Your code goes here
+		self.cache={}
+		self.capacity=capacity
+		self.order=[]
+	
+	def get(self, key):
+		# Your code goes here
+		if key in self.cache:
+			self.order.remove(key)
+			self.order.append(key)
+			return self.cache[key]
+		else:
+			return -1
+	
+	def put(self, key, value):
+
+		if key in self.cache:
+			self.order.remove(key)
+		elif len(self.cache)==self.capacity:
+			unused=self.order.pop(0)
+			del self.cache[unused]
+
+		self.cache[key]=value
+		self.order.append(key)	 
+
+# main
+capacity, q = map(int, stdin.readline().rstrip().split(" "))
+
+cache = LRUCache(capacity)
+
+while q != 0:
+	query = list(map(int, stdin.readline().rstrip().split()))
+
+	if query[0] == 0:
+		key = query[1]
+		print(cache.get(key))
+	elif query[0] == 1:
+		key = query[1]
+		value = query[2]
+		cache.put(key, value)
+	
+	q -= 1

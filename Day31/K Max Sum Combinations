@@ -1,0 +1,28 @@
+from heapq import heappush,heappop
+def kMaxSumCombination(a, b, n, k):
+	# Write your code here.
+	a.sort()
+	b.sort()
+
+	heap=[(-a[-1]-b[-1],n-1,n-1)]
+	vis=set()
+	vis.add((n-1,n-1))
+	ans=[]
+
+	while k>0:
+		SUM,i,j=heappop(heap)
+		ans.append(-SUM)
+
+		if (i-1,j) not in vis:
+			heappush(heap,(-a[i-1]-b[j],i-1,j))
+			vis.add((i-1,j))
+		
+		if (i,j-1) not in vis:
+			heappush(heap,(-a[i]-b[j-1],i,j-1))
+			vis.add((i,j-1))
+		k-=1
+	return ans
+
+
+
+

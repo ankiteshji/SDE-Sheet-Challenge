@@ -1,0 +1,21 @@
+
+
+def subarraysXor(arr, x):
+    # Write your code here
+    # Return an integer
+    ans=0
+
+    n=len(arr)
+    hmap={}
+    curr=0
+    hmap[curr]=1
+    for i in range(n):
+        curr=curr^arr[i]
+
+        req=curr^x
+        
+        if req in hmap:
+            ans+=hmap[req]
+        hmap[curr]=1+hmap.get(curr,0)
+    
+    return ans

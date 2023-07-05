@@ -1,32 +1,31 @@
-
+from collections import OrderedDict
 from sys import stdin
 class LRUCache:
 	# Initialize the LRU Cache
 	def __init__(self, capacity):
 		# Your code goes here
-		self.cache={}
+		self.cache=OrderedDict()
 		self.capacity=capacity
-		self.order=[]
+		
 	
 	def get(self, key):
 		# Your code goes here
 		if key in self.cache:
-			self.order.remove(key)
-			self.order.append(key)
-			return self.cache[key]
+			value = self.cache.pop(key)
+			self.cache[key] = value
+			return value
 		else:
 			return -1
 	
 	def put(self, key, value):
 
 		if key in self.cache:
-			self.order.remove(key)
+			self.cache.pop(key)
 		elif len(self.cache)==self.capacity:
-			unused=self.order.pop(0)
-			del self.cache[unused]
+			self.cache.popitem(last=False)
 
 		self.cache[key]=value
-		self.order.append(key)	 
+		 
 
 # main
 capacity, q = map(int, stdin.readline().rstrip().split(" "))

@@ -1,0 +1,35 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def ayushGivesNinjatest(n, m, time):
+
+    ma=max(time)
+    total=sum(time)
+
+    s=ma
+    end=total
+    ans=s
+    while s<=end:
+        mid=(s+end)//2
+
+        days=1
+        currtime=0
+
+        for j in range(m):
+            currtime+=time[j]
+
+            if currtime>mid:
+                days+=1
+                currtime=time[j]
+
+        if days<=n:
+            ans=mid
+            end=mid-1
+        else:
+            s=mid+1
+
+    return ans
+
+    

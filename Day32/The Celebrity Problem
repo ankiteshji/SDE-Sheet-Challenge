@@ -1,0 +1,31 @@
+
+def findCelebrity(n, knows):
+    
+    ind_degree=[0]*n
+    out_degree=[0]*n
+    stack=[]
+
+    for i in range(n):
+        stack.append(i)
+
+    while len(stack)>1:
+        p1=stack.pop()
+        p2=stack.pop()
+
+        if knows(p1,p2):
+            stack.append(p2)
+        else:
+            stack.append(p1)
+    celebrity=stack[-1]
+    any,all=False,True
+    for i in range(n):
+        if knows(celebrity,i)==True:
+            any=True
+            break
+    for i in range(n):
+        if i!=celebrity and knows(i,celebrity)==False:
+            all=False
+            break
+    if any==True or all==False:
+        celebrity=-1
+    return celebrity

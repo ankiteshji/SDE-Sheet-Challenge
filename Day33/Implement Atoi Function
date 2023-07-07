@@ -1,0 +1,17 @@
+
+def atoi(s):
+    # Write your code here.
+   
+    if s[0]=="-":
+        neg=True
+    ans=0
+
+    for item in s:
+
+        if item>="0" and item<="9":
+            item=ord(item)-ord('0')
+            ans=ans*10+item
+    if neg is True:
+        ans*=-1
+    return ans
+    

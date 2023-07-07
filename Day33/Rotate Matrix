@@ -1,0 +1,35 @@
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+def rotateMatrix(mat, n, m):
+
+    # Write your code here
+    row,col=0,0
+    while row<n and col<m:
+        
+        if row==n-1 or col==m-1:
+            break
+        prev=mat[row+1][col]
+        
+        for i in range(col,m):
+            mat[row][i],prev=prev,mat[row][i]
+        row+=1
+        
+        for i in range(row,n):
+            mat[i][m-1],prev=prev,mat[i][m-1]
+        m-=1
+        
+        if row<n:
+            for i in range(m-1,col-1,-1):
+                mat[n-1][i],prev=prev,mat[n-1][i]
+        n-=1
+        if col<m:
+            for i in range(n-1,row-1,-1):
+                mat[i][col],prev=prev,mat[i][col]
+                
+
+        col+=1
+    
+        

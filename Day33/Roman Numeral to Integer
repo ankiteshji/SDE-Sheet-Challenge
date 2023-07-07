@@ -1,0 +1,23 @@
+
+def romanToInt(s,t):
+    
+
+    # Write your code here
+    # Return the int value
+    n=len(s)
+    values = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V": 5, "I": 1}
+    prev=0
+    ans=0
+    for i in range(n-1,-1,-1):
+        char=s[i]
+        char_val=values[char]
+
+        if char_val>prev:
+            ans+=char_val
+        else:
+            ans-=char_val
+
+        prev=char_val
+
+    return ans
+

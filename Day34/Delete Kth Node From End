@@ -1,0 +1,46 @@
+'''
+Following is the structure of the Node class already defined.
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        
+'''
+def reverse(head):
+    prev,curr=None,head
+
+    while curr:
+        temp=curr.next
+        curr.next=prev
+        prev=curr
+        curr=temp
+    
+    return prev
+
+    
+def removeKthNode(head, k):
+    # Write your code here.
+    curr=reverse(head)
+    revive=curr
+    prev=None
+    k-=1
+    if k<=0:
+        curr=curr.next
+        revive=curr
+    else:
+        while curr:
+            prev=curr
+            curr=curr.next
+            k-=1
+            if k<=0:
+                break
+    
+        prev.next=curr.next
+
+    head=reverse(revive)
+    return head
+
+    
+    
+    

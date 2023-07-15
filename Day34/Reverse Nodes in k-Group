@@ -1,0 +1,59 @@
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+# Following is the class structure of the Node class:   
+class Node:
+    def __init__(self, data):
+       	self.data = data
+        self.next = None
+def rev(head):
+    prev,curr=None,head
+    while curr:
+        temp=curr.next
+        curr.next=prev
+        prev=curr
+        curr=temp
+    return prev
+def getListAfterReverseOperation(head, n, b):
+    # Write your code here.
+    if not head:
+        return None
+    
+    curr=head
+    check=False
+    i=0
+    last=None
+    while curr and i<n:
+        k=b[i]
+
+        if k==0:
+            i+=1
+            continue
+        join=curr
+        prev=None
+        while curr and k>0:
+            k-=1
+            temp=curr.next
+            curr.next=prev
+            prev=curr
+            curr=temp
+        
+        if not check:
+            head=prev
+            check=True
+        if last:
+            last.next=prev
+        last=join
+        i+=1
+
+    if last :
+        last.next=curr
+    
+    return head
+
+
+
+    
+    

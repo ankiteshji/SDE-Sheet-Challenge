@@ -1,0 +1,37 @@
+def zAlgorithm(s, p, n, m):
+    # Write your code here
+    # Return an integer.
+    total=p+"$"+s
+    t=len(total)
+    l,r=0,0
+    ans=0
+    Z=[0]*t
+    pos=0
+    for  i in range(1,t):
+
+        if i>r:
+            l,r=i,i
+
+            while r<t and total[r-l]==total[r]:
+                r+=1
+            Z[i]=r-l
+            r-=1
+
+            
+        else:
+            pos=i-l
+            if Z[pos]<r-i+1:
+                Z[i]=Z[pos]
+
+                
+            else:
+                l=i
+                while r < t and total[r - l] ==total[r]:
+                    r += 1
+                Z[i] = r - l
+                r -= 1
+                
+    ans=Z.count(m)
+    return ans
+
+

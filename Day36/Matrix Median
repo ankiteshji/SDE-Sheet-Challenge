@@ -1,0 +1,20 @@
+from heapq import heappush,heappop
+def getMedian(matrix):
+    # Write your code here.
+    n=len(matrix)
+    m=len(matrix[0])
+    minHeap=[]
+    maxHeap=[]
+    
+
+    for i in range(n):
+        for j in range(m):
+            item=matrix[i][j]
+            heappush(maxHeap,-item)
+            heappush(minHeap,-heappop(maxHeap))
+            if len(minHeap)>len(maxHeap):
+                heappush(maxHeap,-heappop(minHeap))
+    if len(maxHeap)!=len(minHeap):
+        return -maxHeap[0]
+    return (minHeap[0]-maxHeap[0])//2 
+    

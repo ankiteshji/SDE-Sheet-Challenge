@@ -1,0 +1,36 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+''' 
+    class BinaryTreeNode:
+        def __init__(self, data):
+            self.data = data
+            self.left = None
+            self.right = None
+
+'''
+class LinkedList:
+    
+    def __init__(self):
+        self.head = None
+        self.prev = None
+    def findHead(self, root):
+        
+        if(root == None):
+            return
+        self.findHead(root.left)
+        if(self.prev == None):
+            self.head = root
+        else:
+            root.left = self.prev
+            self.prev.right = root
+        self.prev = root
+        self.findHead(root.right)
+def BTtoDLL(root):
+    ll = LinkedList()
+    ll.findHead(root)
+
+    return ll.head
+    

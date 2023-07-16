@@ -1,0 +1,20 @@
+from heapq import heappush,heappop
+
+def findMedian(arr, n):
+    maxHeap=[]
+    minHeap=[]
+
+
+    for item in arr:
+        heappush(maxHeap,-item)
+        heappush(minHeap,-heappop(maxHeap))
+
+        if len(minHeap)>len(maxHeap):
+            heappush(maxHeap,-heappop(minHeap))
+        if len(maxHeap)!=len(minHeap):
+            print(-maxHeap[0],end=" ")
+        else:
+            # print((-maxHeap[0] + minHeap[0]) //2,end=" ")
+            print((minHeap[0]-maxHeap[0])//2,end=" ")
+
+    

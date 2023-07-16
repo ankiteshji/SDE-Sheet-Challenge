@@ -1,0 +1,42 @@
+timer=1
+def dfs(node,disc,nodeStack,inStack,low,adj,ans):
+    
+    global timer
+    disc[node]=low[node]=timer
+    timer+=1
+    nodeStack.append(node)
+    inStack[node]=True
+    for nbr in adj[node]:
+        if disc[nbr]==-1:
+            dfs(nbr,disc,nodeStack,inStack,low,adj,ans)
+            low[node]=min(low[node],low[nbr])
+        elif inStack[nbr]:
+            low[node]=min(low[node],disc[nbr])
+    if low[node] == disc[node]:
+        component = []
+        u = 0
+        while nodeStack[-1] != node:
+            u = nodeStack.pop()
+            inStack[u] = False
+            component.append(u)
+        u = nodeStack.pop()
+        inStack[u] = False
+        component.append(u)
+        ans.append(component)
+    
+def stronglyConnectedComponents(n, edges):
+    # Write your code here
+    adj=[[]for _ in range(n)]
+
+    for u,v in edges:
+        adj[u].append(v)
+    disc = [-1] * n
+    low = [-1] * n
+    nodeStack = []
+    inStack = [False] * n
+    ans=[]
+    for i in range(n):
+        if disc[i]==-1:
+            dfs(i,disc,nodeStack,inStack,low,adj,ans)
+    return ans
+    

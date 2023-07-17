@@ -1,0 +1,36 @@
+class Node:
+    def __init__(self, val=0, next=None, child=None):
+        self.data = val
+        self.next = next
+        self.child = child
+
+
+# Don't change the code above.
+
+def merge(first,sec):
+    if not first:
+        sec.next=None
+        return sec
+    if not sec:
+        first.next=None
+        return first
+    merged=None
+
+    if first.data<sec.data:
+        merged=first
+        merged.child=merge(first.child,sec)
+        
+    else:
+        merged=sec
+        merged.child=merge(first,sec.child)
+    merged.next=None
+    return merged
+
+def flattenLinkedList(head: Node) -> Node:
+    # Write your code here
+    if not head or not head.next:
+        return head
+
+    head.next=flattenLinkedList(head.next)
+    head=merge(head,head.next)
+    return head

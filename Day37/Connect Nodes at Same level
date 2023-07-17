@@ -1,0 +1,37 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+'''
+    ----------------- Binary Tree node class for reference -----------------
+    
+    class BinaryTreeNode:
+        def __init__(self, data):
+            self.data = data
+            self.left = None
+            self.right = None
+            self.next = None
+'''
+
+def connectNodes(root):
+    # Write your code here.
+    q=[root]
+    nodes=1
+
+    while q:
+        prev=None
+
+        while nodes>0:
+            node=q.pop(0)
+            if prev:
+                prev.next=node
+            prev=node
+
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+            nodes-=1
+        nodes=len(q)
+    

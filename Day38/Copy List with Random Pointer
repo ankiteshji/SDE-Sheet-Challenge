@@ -1,0 +1,30 @@
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+class LinkedListNode:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        self.random = None
+        
+
+def cloneRandomList(head):
+    hmap={None:None}
+    curr=head
+
+    while curr:
+        copy=LinkedListNode(curr.data)
+        hmap[curr]=copy
+        curr=curr.next
+    curr=head
+
+    while curr:
+        copy=hmap[curr]
+        copy.next=hmap[curr.next]
+        copy.random=hmap[curr.random]
+        curr=curr.next
+    
+    return hmap[head]
+

@@ -1,0 +1,44 @@
+
+
+
+def fill_path(stack,root,leaf):
+    stack.append(root)
+
+    if not root.left and not root.right:
+        if root.data==leaf:
+            return True
+        else:
+            stack.pop()
+            return False
+    left,right=False,False
+    if root.left:
+        left=fill_path(stack,root.left,leaf)
+    if left:
+        return True
+    if root.right:
+        right=fill_path(stack,root.right,leaf)
+    if right:
+        return True
+    stack.pop()
+    return False
+
+def invertBinaryTree(root, leaf):
+    
+	# Write your code here.
+    if not root:
+        return None
+    stack=[]
+    fill_path(stack,root,leaf)
+    new=stack.pop()
+    parent=new
+    while stack:
+        curr=stack.pop()
+        if curr.left==parent:
+            curr.left=None
+            parent.left=curr
+        else:
+            curr.right=curr.left
+            curr.left=None
+            parent.left=curr
+        parent=parent.left
+    return new
